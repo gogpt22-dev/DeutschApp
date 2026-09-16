@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>خطة إتقان الألمانية A1 • خطوات نحو B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --bg: #080c14;
+      --card-bg: rgba(20, 26, 38, 0.92);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(28, 36, 52, 0.98);
+      --card-done: rgba(16, 42, 28, 0.88);
+      --card-locked: rgba(14, 17, 24, 0.6);
+      --text: #f0f6fc;
+      --text-dim: #8b949e;
+      --de-gold: #ffcc00;
+      --de-red: #ff3344;
+      --accent: #58a6ff;
+      --success: #2ea043;
+      --ab-color: #38d39f;
+      --modal-bg: #121824;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        linear-gradient(rgba(8, 12, 20, 0.84), rgba(8, 12, 20, 0.92)),
+        url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+      padding: 20px 14px 80px;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* Travel Hero Banner */
+    .hero-travel-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      background: linear-gradient(180deg, rgba(11, 16, 26, 0.45), rgba(8, 12, 20, 0.95)),
+                  url('https://images.unsplash.com/photo-1599946347371-68eb71b16afc?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center 35%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.65);
+      padding: 34px 20px 24px;
+      text-align: center;
+    }
+
+    .flag-bar { display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; }
+    .flag-bar span { width: 32px; height: 5px; border-radius: 4px; }
+    .f-black { background-color: #222; }
+    .f-red { background-color: var(--de-red); }
+    .f-gold { background-color: var(--de-gold); }
+
+    .hero-content h1 {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+      margin-bottom: 4px;
+    }
+
+    .hero-content h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--de-gold);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      margin-bottom: 6px;
+    }
+
+    .hero-content p {
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      max-width: 650px;
+      margin: 0 auto 12px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+    }
+
+    .user-badge-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .user-pill {
+      background: rgba(88, 166, 255, 0.15);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      padding: 5px 16px;
+      border-radius: 50px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .change-name-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: inherit;
+    }
+    .change-name-btn:hover { color: var(--de-gold); }
+
+    /* Floating Motivation Toast */
+    #motivation-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px) scale(0.9);
+      opacity: 0;
+      visibility: hidden;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
+      border: 2px solid var(--de-gold);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.7), 0 0 25px rgba(255,204,0,0.3);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 90vw;
+      text-align: center;
+      pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, visibility 0.3s;
+    }
+
+    #motivation-toast.show {
+      transform: translateX(-50%) translateY(0) scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* 3D Balloon Layer */
+    .balloon {
+      position: fixed;
+      bottom: -110px;
+      width: 48px;
+      height: 62px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      z-index: 99998;
+      pointer-events: none;
+      animation: floatUp3D 4.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      box-shadow: inset -7px -7px 15px rgba(0,0,0,0.35), inset 7px 7px 15px rgba(255,255,255,0.4);
+    }
+    .balloon::after {
+      content: "";
+      position: absolute;
+      bottom: -14px;
+      left: 23px;
+      width: 2px;
+      height: 16px;
+      background: rgba(255,255,255,0.45);
+    }
+    @keyframes floatUp3D {
+      0% { transform: translateY(0) scale(0.6) rotate(0deg); opacity: 0; }
+      15% { opacity: 1; transform: translateY(-10vh) scale(1) rotate(5deg); }
+      100% { transform: translateY(-125vh) scale(1.1) rotate(25deg); opacity: 0; }
+    }
+
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-dim);
+      padding: 12px 10px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.25s ease;
+    }
+
+    .tab-btn:hover:not(.locked) {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.18), rgba(88, 166, 255, 0.05));
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(88, 166, 255, 0.2);
+    }
+
+    .tab-btn.locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+      border-style: dashed;
+    }
+
+    /* Panels */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .playlist-banner {
+      background: linear-gradient(135deg, rgba(255, 0, 51, 0.15), rgba(20, 26, 38, 0.95));
+      border: 1px solid rgba(255, 0, 51, 0.35);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .playlist-info h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .playlist-info p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .btn-open-playlist {
+      background: #ff0033;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(255, 0, 51, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-open-playlist:hover {
+      transform: scale(1.03);
+    }
+
+    /* Tracker */
+    .tracker {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(14px);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .progress-labels b { color: var(--de-gold); font-family: 'JetBrains Mono', monospace; }
+    .progress-bg { background: rgba(255, 255, 255, 0.08); height: 8px; border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--de-red), var(--de-gold)); transition: width 0.35s ease; }
+
+    /* Day Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+    }
+
+    .day-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.25s ease;
+    }
+
+    .day-card:hover:not(.locked-card) {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .day-card.day-completed {
+      background: var(--card-done);
+      border-color: rgba(46, 160, 67, 0.45);
+    }
+
+    .day-card.locked-card {
+      background: var(--card-locked);
+      border-color: rgba(255, 255, 255, 0.04);
+      opacity: 0.5;
+    }
+
+    .day-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 6px;
+    }
+
+    .tag-day {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(88, 166, 255, 0.12);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .lektion-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--de-gold);
+    }
+
+    .task-box {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .task-box.disabled-task {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .task-main {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .task-box.disabled-task .task-main {
+      cursor: not-allowed;
+    }
+
+    .task-main input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #484f58;
+      border-radius: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: grid;
+      place-content: center;
+      transition: all 0.2s;
+    }
+
+    .task-box.disabled-task input[type="checkbox"] {
+      cursor: not-allowed;
+      border-color: #333;
+    }
+
+    .task-main input[type="checkbox"]:checked {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .task-main input[type="checkbox"]:checked::after {
+      content: '✓';
+      color: #000;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .task-main.checked .task-desc {
+      text-decoration: line-through;
+      color: var(--text-dim);
+    }
+
+    .task-desc { font-size: 0.86rem; line-height: 1.4; color: var(--text); }
+    .kursbuch-label { color: #80c4ff; font-weight: 700; font-size: 0.78rem; display: block; margin-bottom: 2px; }
+    .ab-label { color: var(--ab-color); font-weight: 700; font-size: 0.78rem; display: block; margin-bottom: 2px; }
+
+    /* Notes */
+    .note-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-align: right;
+      font-family: inherit;
+      padding-top: 4px;
+    }
+    .note-btn:hover { color: var(--accent); }
+
+    .note-box {
+      display: none;
+      width: 100%;
+      background: #10141d;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.8rem;
+      resize: vertical;
+      min-height: 50px;
+      margin-top: 6px;
+    }
+
+    /* Name Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100000;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: var(--modal-bg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      padding: 22px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      animation: popIn 0.25s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: var(--de-gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #0d1117;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      margin-bottom: 14px;
+    }
+    .form-control:focus { border-color: var(--accent); }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--de-gold);
+      color: #000;
+      font-weight: 800;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="motivation-toast">
+  <span id="toast-icon">🚀</span>
+  <span id="toast-text"></span>
+</div>
+
+<!-- Ask Name Modal -->
+<div class="modal-overlay" id="name-modal">
+  <div class="modal-box">
+    <div class="modal-title">
+      <span>✈️</span> خطة السفر وإتقان الألمانية
+    </div>
+    <label style="display:block; font-size:0.82rem; color:var(--text-dim); margin-bottom:6px;">اكتب اسمك لتخصيص خطتك:</label>
+    <input type="text" class="form-control" id="input-user-name" placeholder="اكتب اسمك هنا" />
+    <button class="btn-submit" onclick="saveInitialName()">بدء الرحلة 🚀</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- German Travel & Nature Hero Banner -->
+  <div class="hero-travel-card">
+    <div class="hero-content">
+      <div class="flag-bar">
+        <span class="f-black"></span>
+        <span class="f-red"></span>
+        <span class="f-gold"></span>
+      </div>
+      <h1>Weg nach Deutschland ✈️🇩🇪</h1>
+      <h2>خطة إتقان الألمانية من الصفر حتى B2</h2>
+      <p>محطات منظمة لدروس الشرح والـ Arbeitsbuch خطوة بخطوة نحو السفر والتحدث بطلاقة</p>
+      
+      <div class="user-badge-bar">
+        <div class="user-pill">
+          <span>✈️ مسافر نحو ألمانيا:</span>
+          <span id="current-user-display">طالب ألماني</span>
+        </div>
+        <button class="change-name-btn" onclick="openNameModal()">تعديل الاسم</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overall Progress Tracker -->
+  <div class="tracker">
+    <div class="progress-labels">
+      <span>معدل إنجاز المهام الكلية (شروحات + كتاب الواجب)</span>
+      <span><b id="done-count">0</b> / <span id="total-count">0</span> مهمة (<span id="pct">0%</span>)</span>
+    </div>
+    <div class="progress-bg">
+      <div class="progress-fill" id="progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Tabs -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" id="tab-a11" onclick="switchTab('stage-a11', this)">
+      <span>🇩🇪 النصف الأول</span>
+      <small style="font-size:0.7rem; color:inherit;">A1.1 (18 يوم)</small>
+    </button>
+    <button class="tab-btn locked" id="tab-a12" onclick="switchTab('stage-a12', this)">
+      <span>🔒 النصف الثاني</span>
+      <small style="font-size:0.7rem; color:inherit;">A1.2 (15 يوم)</small>
+    </button>
+    <button class="tab-btn locked" id="tab-grammar" onclick="switchTab('stage-grammar', this)">
+      <span>🔒 الجراماتيك</span>
+      <small style="font-size:0.7rem; color:inherit;">مكثف القواعد (يومان)</small>
+    </button>
+  </div>
+
+  <!-- Tab 1: A1.1 -->
+  <div class="tab-panel active" id="stage-a11">
+    <div class="playlist-banner">
+      <div class="playlist-info">
+        <h3>قائمة تشغيل النصف الأول (A1.1) • مس آية أمين</h3>
+        <p>تشمل شرح Kursbuch وحل تمارين كتاب الواجب Arbeitsbuch للوحدات 1 إلى 7</p>
+      </div>
+      <a href="https://youtube.com/playlist?list=PL_Lje8xtkLIrDBN78pbFG5r1xFOIHXIBj" target="_blank" rel="noopener" class="btn-open-playlist">
+        <span>▶️</span> فتح قائمة A1.1 على YouTube
+      </a>
+    </div>
+    <div class="grid" id="a11-grid"></div>
+  </div>
+
+  <!-- Tab 2: A1.2 -->
+  <div class="tab-panel" id="stage-a12">
+    <div class="playlist-banner">
+      <div class="playlist-info">
+        <h3>قائمة تشغيل النصف الثاني (A1.2) • مس آية أمين</h3>
+        <p>تشمل شرح وحل تمارين الوحدات 8 إلى 14 والماضي التام Perfekt</p>
+      </div>
+      <a href="https://youtube.com/playlist?list=PL_Lje8xtkLIqeaHwE43KXKy9BMPyuCa5m" target="_blank" rel="noopener" class="btn-open-playlist">
+        <span>▶️</span> فتح قائمة A1.2 على YouTube
+      </a>
+    </div>
+    <div class="grid" id="a12-grid"></div>
+  </div>
+
+  <!-- Tab 3: Grammatik -->
+  <div class="tab-panel" id="stage-grammar">
+    <div class="playlist-banner">
+      <div class="playlist-info">
+        <h3>قائمة مكثف الجراماتيك (Grammatik A1)</h3>
+        <p>3 فيديوهات قواعد + حل ملزمة التمارين لضبط وتلخيص المستوى بالكامل</p>
+      </div>
+      <a href="https://youtube.com/playlist?list=PL_Lje8xtkLIqPgpxLvbXWesBsrq99K3X_" target="_blank" rel="noopener" class="btn-open-playlist">
+        <span>▶️</span> فتح قائمة الجراماتيك على YouTube
+      </a>
+    </div>
+    <div class="grid" id="grammatik-grid"></div>
+  </div>
+
+  <!-- Reset Button -->
+  <div style="text-align: center; margin-top: 35px;">
+    <button onclick="resetAllProgress()" style="background: none; border: 1px solid rgba(255,255,255,0.12); color: var(--text-dim); font-size: 0.76rem; padding: 7px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+      ⚠️ إعادة ضبط الخطة من الصفر (مع الاحتفاظ بالاسم)
+    </button>
+  </div>
+
+</div>
+
+<script>
+  const plan = [
+    // A1.1 (18 يوم - 33 فيديو)
+    { day: 1, stage: 'a11', lek: 'Lektion 1: Guten Tag!', t1: 'فيديو 1: شرح Kursbuch (الأبجدية والتحيات الأولى)', t2: 'فيديو 2: حل تدريبات كتاب الواجب Arbeitsbuch' },
+    { day: 2, stage: 'a11', lek: 'Lektion 1: Guten Tag!', t1: 'فيديو 3: شرح Kursbuch (الأرقام والتعريف بالنفس)', t2: 'فيديو 4: حل تمارين الاستماع والواجب بالـ AB' },
+    { day: 3, stage: 'a11', lek: 'Lektion 1 & 2', t1: 'فيديو 5: ختام نصوص ومحادثات Lektion 1', t2: 'فيديو 6: حل تدريبات تثبيت كلمات الوحدة الأولى' },
+
+    { day: 4, stage: 'a11', lek: 'Lektion 2: Familie und Freunde', t1: 'فيديو 7: شرح شجرة العائلة والضمائر الشخصية', t2: 'فيديو 8: حل تدريبات تصريف أفعال المحاضرة' },
+    { day: 5, stage: 'a11', lek: 'Lektion 2: Familie und Freunde', t1: 'فيديو 9: شرح تصريف الأفعال وتكوين السؤال', t2: 'فيديو 10: حل تمارين كتاب الواجب لـ Lektion 2' },
+    { day: 6, stage: 'a11', lek: 'Lektion 2 & 3', t1: 'فيديو 11: التحدث عن اللغات والبلاد وختام الوحدة', t2: 'فيديو 12: حل تدريبات المراجعة والاختبار الصغير' },
+
+    { day: 7, stage: 'a11', lek: 'Lektion 3: Essen und Trinken', t1: 'فيديو 13: شرح الأطعمة وأدوات der, die, das', t2: 'فيديو 14: حل تدريبات تصنيف الكلمات والأدوات بالـ AB' },
+    { day: 8, stage: 'a11', lek: 'Lektion 3: Essen und Trinken', t1: 'فيديو 15: شرح الجمع والنفي بـ kein/keine', t2: 'فيديو 16: حل تدريبات النفي والمذكر والمؤنث' },
+    { day: 9, stage: 'a11', lek: 'Lektion 3 & 4', t1: 'فيديو 17: التسوق والأسعار والمحادثة اليومية', t2: 'فيديو 18: حل تمارين ختام Lektion 3 بالـ AB' },
+
+    { day: 10, stage: 'a11', lek: 'Lektion 4: Meine Wohnung', t1: 'فيديو 19: شرح أنواع السكن والغرف والأثاث', t2: 'فيديو 20: حل تدريبات قطع الأثاث بالـ AB' },
+    { day: 11, stage: 'a11', lek: 'Lektion 4: Meine Wohnung', t1: 'فيديو 21: شرح الصفات والألوان والنفي بـ nicht', t2: 'فيديو 22: حل تمارين المقارنة ووصف الشقق' },
+    { day: 12, stage: 'a11', lek: 'Lektion 4 & 5', t1: 'فيديو 23: قراءة إعلانات السكن ونهاية الوحدة', t2: 'فيديو 24: حل مراجعة Lektion 4 بالكامل' },
+
+    { day: 13, stage: 'a11', lek: 'Lektion 5: Mein Tag', t1: 'فيديو 25: شرح قراءة الساعة الرسمية وغير الرسمية', t2: 'فيديو 26: حل تدريبات ضبط التوقيت بالـ AB' },
+    { day: 14, stage: 'a11', lek: 'Lektion 5 & 6', t1: 'فيديو 27: شرح الأفعال المنفصلة Trennbare Verben', t2: 'فيديو 28: حل تمارين الأفعال المنفصلة بالواجب' },
+
+    { day: 15, stage: 'a11', lek: 'Lektion 6: Freizeit', t1: 'فيديو 29: شرح الهوايات وأوقات الفراغ والأيام', t2: 'فيديو 30: حل تدريبات الأنشطة وتصريف können' },
+    { day: 16, stage: 'a11', lek: 'Lektion 6 & 7', t1: 'فيديو 31: ختام محادثات وتمارين Lektion 6', t2: 'فيديو 32: شرح بداية Lektion 7 وحل واجباتها' },
+
+    { day: 17, stage: 'a11', lek: 'Lektion 7: Kinder und Schule', t1: 'فيديو 33: ختام وشرح Lektion 7 لإنهاء A1.1 بالكامل', t2: 'حل وتصحيح بنك تمارين Lektion 7 من كتاب الواجب' },
+    { day: 18, stage: 'a11', lek: 'A1.1 Abschlusstest', t1: 'مراجعة وتثبيت كلمات وقواعد A1.1 (الوحدات 1-7)', t2: 'حل امتحان نصف المستوى A1.1 وتصحيح الملاحظات' },
+
+    // A1.2 (15 يوم - 30 فيديو)
+    { day: 19, stage: 'a12', lek: 'Lektion 8: Beruf und Arbeit', t1: 'فيديو 1 (A1.2): شرح المهن وأماكن العمل', t2: 'فيديو 2: حل تدريبات المذكر والمؤنث في المهن بالـ AB' },
+    { day: 20, stage: 'a12', lek: 'Lektion 8: Beruf und Arbeit', t1: 'فيديو 3: شرح صيغ الماضي البسيط war و hatte', t2: 'فيديو 4: حل تدريبات التحويل للماضي وتثبيت Lektion 8' },
+
+    { day: 21, stage: 'a12', lek: 'Lektion 9: In einer fremden Stadt', t1: 'فيديو 5: شرح الأماكن وسؤال الطريق والاتجاهات', t2: 'فيديو 6: حل تدريبات الخرائط والأماكن بالـ AB' },
+    { day: 22, stage: 'a12', lek: 'Lektion 9: In einer fremden Stadt', t1: 'فيديو 7: شرح حالة المفعول به Akkusativ مع الأدوات', t2: 'فيديو 8: حل تمارين تحويل der إلى den بالواجب' },
+
+    { day: 23, stage: 'a12', lek: 'Lektion 10: Gesundheit', t1: 'فيديو 9: شرح أجزاء الجسم والشكوى من الألم', t2: 'فيديو 10: حل تدريبات أعضاء الجسم والأمراض' },
+    { day: 24, stage: 'a12', lek: 'Lektion 10: Gesundheit', t1: 'فيديو 11: شرح فعل sollen وصيغ الأوامر Imperativ', t2: 'فيديو 12: حل تدريبات محادثة الطبيب والواجب' },
+
+    { day: 25, stage: 'a12', lek: 'Lektion 11: Unterwegs', t1: 'فيديو 13: شرح وسائل المواصلات ومحطة القطار', t2: 'فيديو 14: حل تدريبات حروف الجر لوسائل النقل' },
+    { day: 26, stage: 'a12', lek: 'Lektion 11: Unterwegs', t1: 'فيديو 15: شرح حروف الجر المكانية وحالة Dativ', t2: 'فيديو 16: حل تمارين الاتجاهات والداتيف بالـ AB' },
+
+    { day: 27, stage: 'a12', lek: 'Lektion 12: Kundenservice', t1: 'فيديو 17: شرح الخدمات والمواعيد الهاتفية', t2: 'فيديو 18: حل تدريبات قراءة إيميلات العملاء' },
+    { day: 28, stage: 'a12', lek: 'Lektion 12: Kundenservice', t1: 'فيديو 19: شرح زمن الماضي التام Perfekt مع haben', t2: 'فيديو 20: حل تدريبات Partizip II في كتاب الواجب' },
+
+    { day: 29, stage: 'a12', lek: 'Lektion 13: Neue Kleider', t1: 'فيديو 21: شرح الملابس والمقاسات والألوان', t2: 'فيديو 22: حل تدريبات الشراء ومفردات الملابس' },
+    { day: 30, stage: 'a12', lek: 'Lektion 13: Neue Kleider', t1: 'فيديو 23: شرح الماضي التام مع sein وضمائر النصب', t2: 'فيديو 24: حل تمارين أفعال الحركة في الماضي بالـ AB' },
+
+    { day: 31, stage: 'a12', lek: 'Lektion 14: Feste und Freunde', t1: 'فيديو 25: شرح الحفلات والمناسبات وبطاقات المعايدة', t2: 'فيديو 26: حل تدريبات صياغة الدعوات والإيميلات' },
+    { day: 32, stage: 'a12', lek: 'Lektion 14: Feste und Freunde', t1: 'فيديو 27: شرح حروف الجر الزمنية والوداع', t2: 'فيديو 28: حل تدريبات ختام Lektion 14 بالكامل' },
+    { day: 33, stage: 'a12', lek: 'A1.2 Abschluss', t1: 'فيديو 29: مراجعة وتلخيص شامل لمنهج A1.2', t2: 'فيديو 30: حل بنك الأسئلة والتدريبات التجميعية' },
+
+    // Grammatik (يومان - 4 مهام)
+    { day: 34, stage: 'grammatik', lek: 'مكثف القواعد النحوية', t1: 'فيديو قواعد 1: الأزمنة وتصريف الأفعال المنتظمة والشاذة', t2: 'فيديو قواعد 2: حالات الإعراب (Nominativ & Akkusativ)' },
+    { day: 35, stage: 'grammatik', lek: 'مكثف القواعد النحوية', t1: 'فيديو قواعد 3: حروف الجر، أدوات الاستفهام وصياغة Perfekt', t2: 'حل ملزمة تمارين القواعد المجمعة وتلخيص الجداول' }
+  ];
+
+  const STORAGE_KEY = 'deutsch_a1_strict_v8';
+  const USER_KEY = 'deutsch_a1_user_name_v8';
+
+  let state = {};
+  let currentUserName = "طالب ألماني";
+  let sharedAudioCtx = null;
+
+  function loadLocalState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) state = JSON.parse(saved);
+
+      const savedName = localStorage.getItem(USER_KEY);
+      if (savedName) currentUserName = savedName;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // التحقق من فتح المهام بالترتيب الصارم
+  function isTaskAllowed(day, sub) {
+    if (day === 1 && sub === 1) return true;
+    if (sub === 2) return !!state[`d_${day}_1`];
+    if (sub === 1 && day > 1) {
+      const prev = day - 1;
+      return !!(state[`d_${prev}_1`] && state[`d_${prev}_2`]);
+    }
+    return false;
+  }
+
+  // التحقق من فتح المستويات بالتتابع
+  function isStageUnlocked(stage) {
+    if (stage === 'stage-a11') return true;
+    if (stage === 'stage-a12') {
+      for (let i = 1; i <= 18; i++) {
+        if (!state[`d_${i}_1`] || !state[`d_${i}_2`]) return false;
+      }
+      return true;
+    }
+    if (stage === 'stage-grammar') {
+      for (let i = 1; i <= 33; i++) {
+        if (!state[`d_${i}_1`] || !state[`d_${i}_2`]) return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function hasFutureProgress(day, sub) {
+    if (sub === 1 && state[`d_${day}_2`]) return true;
+    for (let d = day + 1; d <= 35; d++) {
+      if (state[`d_${d}_1`] || state[`d_${d}_2`]) return true;
+    }
+    return false;
+  }
+
+  // حماية التبويب النشط لو أُعيد قفله
+  function ensureActiveTabIsUnlocked() {
+    const activePanel = document.querySelector('.tab-panel.active');
+    if (!activePanel) return;
+
+    if (!isStageUnlocked(activePanel.id)) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById('stage-a11').classList.add('active');
+      document.getElementById('tab-a11').classList.add('active');
+    }
+  }
+
+  // Singleton Web Audio API
+  function playGermanChime(isFullDay = false) {
+    try {
+      if (!sharedAudioCtx) {
+        sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (sharedAudioCtx.state === 'suspended') {
+        sharedAudioCtx.resume();
+      }
+      const notes = isFullDay ? [523.25, 659.25, 783.99, 1046.50] : [587.33, 880];
+      notes.forEach((freq, idx) => {
+        const osc = sharedAudioCtx.createOscillator();
+        const gain = sharedAudioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, sharedAudioCtx.currentTime + idx * 0.12);
+        gain.gain.setValueAtTime(0.15, sharedAudioCtx.currentTime + idx * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.001, sharedAudioCtx.currentTime + idx * 0.12 + 0.35);
+        osc.connect(gain);
+        gain.connect(sharedAudioCtx.destination);
+        osc.start(sharedAudioCtx.currentTime + idx * 0.12);
+        osc.stop(sharedAudioCtx.currentTime + idx * 0.12 + 0.35);
+      });
+    } catch(e) {}
+  }
+
+  // German Celebrations
+  const germanLessonPhrases = [
+    "Sehr gut! خلصت الشرح باقتدار.. يلا على الواجب وثبت القاعدة! ✍️🇩🇪",
+    "Klasse gemacht! استوعبت المحاضرة، ادخل فوراً على الـ Arbeitsbuch! 📖⚡",
+    "Weiter so! خطوة ممتازة.. كمل الواجب لفتح اليوم القادم! 🇩🇪💪"
+  ];
+
+  const germanFullDayPhrases = [
+    "Ausgezeichnet! قفلت يوم ألماني كامل.. خطوة عملاقة نحو الـ B2! 🇩🇪🎉",
+    "Wunderbar! استمرارية أبطال، كل يوم يقربك من السفر والتحدث بطلاقة! 🏆✈️",
+    "Fantastisch! أداء ألماني متكامل ومحكم.. فخورين بيك يا بطل! ⭐👏"
+  ];
+
+  const deFlagColors = ['#111111', '#ff3344', '#ffcc00'];
+
+  function createGermanBalloons(count = 18) {
+    for (let i = 0; i < count; i++) {
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.left = Math.random() * 88 + 6 + 'vw';
+      b.style.backgroundColor = deFlagColors[i % deFlagColors.length];
+      b.style.animationDuration = (3.2 + Math.random() * 1.8) + 's';
+      b.style.animationDelay = (Math.random() * 0.35) + 's';
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 5500);
+    }
+  }
+
+  let toastTimer = null;
+  function showCelebrationToast(text, icon = "🎉") {
+    const toast = document.getElementById('motivation-toast');
+    const toastText = document.getElementById('toast-text');
+    const toastIcon = document.getElementById('toast-icon');
+
+    toastText.innerText = text;
+    toastIcon.innerText = icon;
+    toast.classList.add('show');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4500);
+  }
+
+  function triggerLessonCelebration() {
+    playGermanChime(false);
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.7 },
+        colors: deFlagColors
+      });
+    }
+    createGermanBalloons(6);
+    showCelebrationToast(germanLessonPhrases[Math.floor(Math.random() * germanLessonPhrases.length)], "🇩🇪");
+  }
+
+  function triggerFullDayCelebration() {
+    playGermanChime(true);
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 85,
+        angle: 60,
+        spread: 65,
+        origin: { y: 0.7 },
+        colors: deFlagColors
+      });
+      confetti({
+        particleCount: 85,
+        angle: 120,
+        spread: 65,
+        origin: { x: 1, y: 0.7 },
+        colors: deFlagColors
+      });
+    }
+    createGermanBalloons(20);
+    showCelebrationToast(germanFullDayPhrases[Math.floor(Math.random() * germanFullDayPhrases.length)], "🏆");
+  }
+
+  // Render Schedule
+  function renderPlan() {
+    ['a11', 'a12', 'grammatik'].forEach(stg => {
+      const el = document.getElementById(`${stg}-grid`);
+      if (el) el.innerHTML = '';
+    });
+
+    plan.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'day-card';
+      card.id = `card-${item.day}`;
+
+      const d1 = state[`d_${item.day}_1`] || false;
+      const d2 = state[`d_${item.day}_2`] || false;
+      const note = state[`note_${item.day}`] || '';
+
+      const allowT1 = isTaskAllowed(item.day, 1);
+      const allowT2 = isTaskAllowed(item.day, 2);
+
+      if (d1 && d2) {
+        card.classList.add('day-completed');
+      } else if (!allowT1) {
+        card.classList.add('locked-card');
+      }
+
+      card.innerHTML = `
+        <div class="day-top">
+          <span class="tag-day">TAG ${String(item.day).padStart(2, '0')}</span>
+          <span class="lektion-badge">${(!allowT1 && !d1) ? '🔒 ' : ''}${item.lek}</span>
+        </div>
+
+        <div class="task-box ${(!allowT1 && !d1) ? 'disabled-task' : ''}">
+          <label class="task-main ${d1 ? 'checked' : ''}">
+            <input type="checkbox" id="chk_${item.day}_1" ${d1 ? 'checked' : ''} ${(!allowT1 && !d1) ? 'disabled' : ''} onchange="toggle(${item.day}, 1)">
+            <div>
+              <span class="kursbuch-label">📖 الشرح الأساسي (Kursbuch)</span>
+              <div class="task-desc">${item.t1}</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="task-box ${(!allowT2 && !d2) ? 'disabled-task' : ''}">
+          <label class="task-main ${d2 ? 'checked' : ''}">
+            <input type="checkbox" id="chk_${item.day}_2" ${d2 ? 'checked' : ''} ${(!allowT2 && !d2) ? 'disabled' : ''} onchange="toggle(${item.day}, 2)">
+            <div>
+              <span class="ab-label">✍️ الواجب والتدريبات (Arbeitsbuch)</span>
+              <div class="task-desc">${item.t2}</div>
+            </div>
+          </label>
+        </div>
+
+        <div>
+          <button class="note-btn" onclick="toggleNote(${item.day})">📝 ملاحظات اليوم</button>
+          <textarea class="note-box" id="note_${item.day}" placeholder="اكتب هنا أي كلمات صعبة أو ملاحظات..." oninput="saveNote(${item.day})">${note}</textarea>
+        </div>
+      `;
+
+      const target = document.getElementById(`${item.stage}-grid`);
+      if (target) target.appendChild(card);
+    });
+
+    updateStageTabsLockStatus();
+    calcProgress();
+    ensureActiveTabIsUnlocked();
+  }
+
+  function updateStageTabsLockStatus() {
+    const a12Unlocked = isStageUnlocked('stage-a12');
+    const gramUnlocked = isStageUnlocked('stage-grammar');
+
+    const tabA12 = document.getElementById('tab-a12');
+    const tabGram = document.getElementById('tab-grammar');
+
+    if (tabA12) {
+      if (a12Unlocked) { tabA12.classList.remove('locked'); tabA12.querySelector('span').innerText = '🇩🇪 النصف الثاني'; }
+      else { tabA12.classList.add('locked'); tabA12.querySelector('span').innerText = '🔒 النصف الثاني'; }
+    }
+    if (tabGram) {
+      if (gramUnlocked) { tabGram.classList.remove('locked'); tabGram.querySelector('span').innerText = '⚡ الجراماتيك'; }
+      else { tabGram.classList.add('locked'); tabGram.querySelector('span').innerText = '🔒 الجراماتيك'; }
+    }
+  }
+
+  function toggle(day, sub) {
+    const chk = document.getElementById(`chk_${day}_${sub}`);
+    const isChecked = chk.checked;
+
+    if (isChecked && !isTaskAllowed(day, sub)) {
+      chk.checked = false;
+      if (sub === 2) {
+        alert('⚠️ عذراً! لا يمكنك تعليم حل الواجب إلا بعد إتمام شرح المحاضرة أولاً!');
+      } else {
+        alert(`⚠️ عذراً! يجب إنهاء اليوم السابق (اليوم ${day-1}) كاملاً بشرحه وواجبه لفتح هذا اليوم!`);
+      }
+      return;
+    }
+
+    if (!isChecked) {
+      if (hasFutureProgress(day, sub)) {
+        const confirmReset = confirm("⚠️ تنبيه: إلغاء هذه المهمة سيعيد قفل الأيام التالية للحفاظ على تسلسل المذاكرة الصارم. هل تريد المتابعة؟");
+        if (!confirmReset) {
+          chk.checked = true;
+          return;
+        }
+      }
+
+      if (sub === 1) {
+        state[`d_${day}_1`] = false;
+        state[`d_${day}_2`] = false;
+      } else {
+        state[`d_${day}_2`] = false;
+      }
+      for (let d = day + 1; d <= 35; d++) {
+        state[`d_${d}_1`] = false;
+        state[`d_${d}_2`] = false;
+      }
+    } else {
+      state[`d_${day}_${sub}`] = true;
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+    const d1 = state[`d_${day}_1`] || false;
+    const d2 = state[`d_${day}_2`] || false;
+
+    if (isChecked) {
+      if (d1 && d2) triggerFullDayCelebration();
+      else if (sub === 1) triggerLessonCelebration();
+    }
+
+    renderPlan();
+  }
+
+  function toggleNote(day) {
+    const box = document.getElementById(`note_${day}`);
+    box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+  }
+
+  function saveNote(day) {
+    state[`note_${day}`] = document.getElementById(`note_${day}`).value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function calcProgress() {
+    const total = plan.length * 2;
+    let done = 0;
+    plan.forEach(item => {
+      if (state[`d_${item.day}_1`]) done++;
+      if (state[`d_${item.day}_2`]) done++;
+    });
+
+    const percent = Math.round((done / total) * 100);
+    document.getElementById('total-count').innerText = total;
+    document.getElementById('done-count').innerText = done;
+    document.getElementById('pct').innerText = `${percent}%`;
+    document.getElementById('progress-bar').style.width = `${percent}%`;
+  }
+
+  // Tabs Switcher with lock guard
+  function switchTab(panelId, btn) {
+    if (!isStageUnlocked(panelId)) {
+      if (panelId === 'stage-a12') {
+        alert('🔒 النصف الثاني مغلق! يجب إنهاء جميع أيام النصف الأول (18 يوم) كاملاً لفتحه.');
+      } else if (panelId === 'stage-grammar') {
+        alert('🔒 مكثف الجراماتيك مغلق! يجب إنهاء النصفين الأول والثاني لفتحه.');
+      }
+      return;
+    }
+
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById(panelId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Reset Progress Logic (Keeps Name Intact & Safeguards Tab)
+  function resetAllProgress() {
+    if (confirm("⚠️ هل أنت متأكد من مسح جميع علامات التقدم والبدء من اليوم الأول؟\n(ملاحظة: سيظل اسمك محفوظاً كما هو).")) {
+      localStorage.removeItem(STORAGE_KEY);
+      state = {};
+      renderPlan();
+      showCelebrationToast("تمت إعادة ضبط الخطة بنجاح! بداية جديدة قوية 🇩🇪", "🔄");
+    }
+  }
+
+  // Name Modal Logic
+  function checkUserRegistration() {
+    const savedName = localStorage.getItem(USER_KEY);
+    if (!savedName) {
+      document.getElementById('name-modal').style.display = 'flex';
+    } else {
+      currentUserName = savedName;
+      document.getElementById('current-user-display').innerText = currentUserName;
+    }
+  }
+
+  function openNameModal() {
+    document.getElementById('input-user-name').value = currentUserName;
+    document.getElementById('name-modal').style.display = 'flex';
+  }
+
+  function saveInitialName() {
+    const val = document.getElementById('input-user-name').value.trim();
+    if (val) {
+      currentUserName = val;
+      localStorage.setItem(USER_KEY, currentUserName);
+      document.getElementById('current-user-display').innerText = currentUserName;
+      document.getElementById('name-modal').style.display = 'none';
+      showCelebrationToast(`أهلاً بك يا ${currentUserName}! رحلة موفقة نحو B2`, "🇩🇪");
+    } else {
+      alert("من فضلك اكتب اسمك للمتابعة.");
+    }
+  }
+
+  // Init
+  loadLocalState();
+  renderPlan();
+  checkUserRegistration();
+</script>
+
+</body>
+</html>
+
